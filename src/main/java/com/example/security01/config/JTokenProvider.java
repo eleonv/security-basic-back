@@ -1,5 +1,7 @@
 package com.example.security01.config;
 
+import com.example.security01.util.Constante;
+import com.example.security01.util.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,11 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtTokenProvider {
+public class JTokenProvider {
 
     @Autowired
-    private MyUserDetails myUserDetails;
-    public JwtTokenProvider() {
+    private UserProvider userProvider;
+
+    public JTokenProvider() {
     }
 
     public String resolveToken(HttpServletRequest req) {
@@ -25,7 +28,7 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
 
-        if (token.equals("f3146642-0f32-11ee-be56-0242ac120002"))  {
+        if (Constante.TOKENS_APP.contains(token)) {
             return true; //el token es valido
         } else
             return false;
@@ -39,14 +42,20 @@ public class JwtTokenProvider {
         }*/
     }
 
-    public Authentication getAuthentication(String token) {
+    /*public Authentication getAuthentication(String token) {
         UserDetails userDetails = myUserDetails.loadUserByUsername(getUsername(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }*/
+
+    public Authentication getAuthentication(String token) {
+
+        UserDetails userDetails = userProvider.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public String getUsername(String token) {
         //return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
-        return "edwin";
+        return Utils.base64ToString(token);
     }
 
 

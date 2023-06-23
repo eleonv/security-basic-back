@@ -18,8 +18,8 @@ import java.util.List;
 public class UserController {
 
     @GetMapping(value = "listar", produces = "application/json")
-    //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_USER + "')")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_ADMIN + "')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar(HttpServletRequest request) {
 
         ResponseApi responseAppBean = new ResponseApi();
@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping(value = "registrar", produces = "application/json")
     //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_ADMIN + "')")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RequestUsuario requestUsuario, HttpServletRequest request) {
 
         ResponseApi responseAppBean = new ResponseApi();

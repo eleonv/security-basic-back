@@ -1,5 +1,6 @@
 package com.example.security01.config;
 
+import com.example.security01.util.Constante;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,9 +12,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    private final JTokenProvider jwtTokenProvider;
 
-    public SecurityConfiguration(JwtTokenProvider jwtTokenProvider) {
+    public SecurityConfiguration(JTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
@@ -26,13 +27,17 @@ public class SecurityConfiguration {
         http.sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.authorizeRequests(x -> x
-                        .requestMatchers("/").permitAll()
-                        //.requestMatchers("/api/register", "/api/register", "/api/authenticate").permitAll()
-                        .requestMatchers("/api/v1/usuarios/**").hasAuthority("ADMIN")
+                .requestMatchers("/").permitAll()
+                //.requestMatchers("/api/register", "/api/register", "/api/authenticate").permitAll()
+                //.requestMatchers("/api/v1/usuarios/**").hasAuthority(Constante.ROL_ADMIN)
+                .requestMatchers("/api/v1/usuarios/listar").hasAuthority(Constante.ROL_ADMIN)
+                .requestMatchers("/api/v1/usuarios/registrar").hasAuthority(Constante.ROL_ADMIN)
+                .requestMatchers("/api/v1/usuarios/validar").hasAuthority(Constante.ROL_USER)
+                        //.requestMatchers("/api/v1/usuarios/**").anonymous()
                         .anyRequest().authenticated());
                 //.httpBasic();
 
-        http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
+        http.apply(new JTokenFilterConfigurer(jwtTokenProvider));
 
         //sessionManagement()
         //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
