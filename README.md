@@ -3,15 +3,19 @@ Proyecto spring boot usando spring security
 
 ## Configuracion SecurityConfiguration
 ```java
+@Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http.csrf(x-> x.disable());
+
+    http.csrf(x -> x.disable());
     http.sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
     http.authorizeRequests(x -> x
             .requestMatchers("/").permitAll()
-                .anyRequest().authenticated());
+            .requestMatchers("/api/v1/usuarios/autenticar").permitAll()
+            .anyRequest().authenticated());
 
-    http.apply(new JTokenFilterConfigurer(jwtTokenProvider));
+    http.exceptionHandling(x->x.authenticationEntryPoint(new ExceptionAuthenticationEntryPoint()));
+    http.addFilterBefore(new JTokenFilter(jTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
 }
