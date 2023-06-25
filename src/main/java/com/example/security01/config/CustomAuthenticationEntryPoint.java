@@ -17,21 +17,15 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-
-        OutputStream out = response.getOutputStream();
+        /*OutputStream out = response.getOutputStream();
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(out, "Authentication required");
+        response.addHeader("access_denied_reason", "authentication_required");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        out.flush();*/
 
         response.addHeader("access_denied_reason", "authentication_required");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-        out.flush();
+        response.getOutputStream().println("Authentication required");
     }
-
-    /*@ExceptionHandler(value = { AccessDeniedException.class })
-    public void commence(HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex ) throws IOException {
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getOutputStream().println("{\"mensaje\":\"No tiene permisos para realizar esta acción.\"}");
-    }*/
 }
