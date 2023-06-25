@@ -2,7 +2,7 @@ package com.example.security01.entity;
 
 public class ResponseApi<T> {
     private String status;  // 1:success 0:error
-    private String code;    // caso de error: codigo de error
+    //private String code;    // caso de error: codigo de error
     private String message; // caso de error: mensaje de error
     private T data;         // caso de exito: datos
 
@@ -12,14 +12,6 @@ public class ResponseApi<T> {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getMessage() {

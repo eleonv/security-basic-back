@@ -18,19 +18,13 @@ import java.util.List;
 public class UserController {
 
     @GetMapping(value = "listar", produces = "application/json")
-    //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_ADMIN + "')")
-    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> listar(HttpServletRequest request) {
 
         ResponseApi responseAppBean = new ResponseApi();
         try {
 
-            //List<JPAUsuario> usuarios = new ArrayList<>();
-            //usuarios = repository.findAll();
-
             responseAppBean.setStatus(Constante.RESPONSE_OK);
             responseAppBean.setMessage("Listar usuarios");
-            //responseAppBean.setData(usuarios);
             return new ResponseEntity<>(responseAppBean, HttpStatus.OK);
         } catch (Exception e) {
             responseAppBean.setStatus(Constante.RESPONSE_ERROR);
@@ -39,8 +33,6 @@ public class UserController {
     }
 
     @PostMapping(value = "registrar", produces = "application/json")
-    //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_ADMIN + "')")
-    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> registrar(@RequestBody RequestUsuario requestUsuario, HttpServletRequest request) {
 
         ResponseApi responseAppBean = new ResponseApi();
@@ -56,7 +48,6 @@ public class UserController {
     }
 
     @PostMapping(value = "validar", produces = "application/json")
-    //@PreAuthorize("hasAnyAuthority('" + Constante.ROL_ADMIN + "')")
     public ResponseEntity<?> validar(@RequestBody RequestUsuario requestUsuario, HttpServletRequest request) {
 
         ResponseApi responseAppBean = new ResponseApi();
@@ -70,4 +61,6 @@ public class UserController {
             return new ResponseEntity<>(responseAppBean, HttpStatus.ACCEPTED);
         }
     }
+
+
 }

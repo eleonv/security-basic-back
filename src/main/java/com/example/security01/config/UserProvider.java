@@ -21,17 +21,11 @@ public class UserProvider implements UserDetailsService {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
 
-        //final AppUser appUser = userRepository.findByUsername(username);
-        //if (appUser == null) {
-        //    throw new UsernameNotFoundException("User '" + username + "' not found");
-        //}
-
         return org.springframework.security.core.userdetails.User//
                 .withUsername(username)//
                 .password(appUser.getPassword())//
-                .authorities(appUser.getRoles())//
-                //.password("edwin")//
-                //.authorities("ADMIN")//
+                //.authorities(appUser.getRoles())//
+                .authorities("ADMIN")//
                 .accountExpired(false)//
                 .accountLocked(false)//
                 .credentialsExpired(false)//

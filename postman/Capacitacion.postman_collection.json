@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "e20c6e47-863a-4b3c-bf74-91e1a6584b9f",
+		"name": "Capacitacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "5161436"
+	},
+	"item": [
+		{
+			"name": "/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZHdpbiIsInVzZXJuYW1lIjoiZWR3aW4iLCJyb2xlcyI6IlJPTF9BRE1JTiwgUk9MX1VTRVIifQ.yza6d-o361h7MCNFpEu1GIvsTovWFZzQe5bREzB7Jjs"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/"
+			},
+			"response": []
+		},
+		{
+			"name": "api/v1/usuarios/listar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "ZWR3aW4="
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/usuarios/listar"
+			},
+			"response": []
+		},
+		{
+			"name": "api/v1/usuarios/registrar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "ZGF2aWQ="
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/usuarios/registrar"
+			},
+			"response": []
+		},
+		{
+			"name": "api/v1/usuarios/validar",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "dXN1YXJpbyAz"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/v1/usuarios/validar"
+			},
+			"response": []
+		}
+	]
+}
